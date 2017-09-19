@@ -39,14 +39,13 @@ RUN curl -O https://storage.googleapis.com/golang/go1.9.linux-amd64.tar.gz &&\
 RUN git clone --recursive https://github.com/sovchinn/dot.git $HOME/dot 
 WORKDIR $HOME/dot
 RUN make
-RUN echo "let g:python_host_prog='/usr/bin/python2'" >> $HOME/.config/nvim/init.vim &&\
-    echo "let g:python3_host_prog='/usr/bin/python3'" >> $HOME/.config/nvim/init.vim
 
 # Install plugins
 RUN nvim -c 'PlugInstall' -c 'UpdateRemotePlugins' -c 'qa!'
 
 # Install Go(lang) binaries
 RUN nvim +GoInstallBinaries +qall; exit 0
+RUN go get -u github.com/nsf/gocode
 
 WORKDIR $HOME
 ENV SHELL /bin/zsh
