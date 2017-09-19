@@ -45,7 +45,7 @@ RUN nvim -c 'PlugInstall' -c 'UpdateRemotePlugins' -c 'qa!'
 
 # Install Go(lang) binaries
 RUN nvim +GoInstallBinaries +qall; exit 0
-RUN go get -u github.com/nsf/gocode
+RUN /usr/local/go/bin/go get -u github.com/nsf/gocode
 
 WORKDIR $HOME
 ENV SHELL /bin/zsh
